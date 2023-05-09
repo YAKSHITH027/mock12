@@ -1,9 +1,10 @@
 const express = require('express')
 const cors = require('cors')
+
 const { connection } = require('./db')
 const { userRoute } = require('./routes/user.route')
 const { empRoutes } = require('./routes/emp.route')
-
+require('dotenv').config()
 const app = express()
 
 app.use(express.json())
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
 app.use('/user', userRoute)
 app.use('/employee', empRoutes)
 
-app.listen(8080, async () => {
+app.listen(process.env.port, async () => {
   try {
     await connection
     console.log('db connected')
