@@ -38,5 +38,27 @@ empRoutes.post('/', async (req, res) => {
     res.status(400).send({ msg: 'something went wrong' })
   }
 })
+empRoutes.patch('/:id', async (req, res) => {
+  try {
+    let { id } = req.params
+    let data = req.body
+    await EmpModel.findByIdAndUpdate(id, data)
+
+    res.status(200).send({ msg: 'edited successfully' })
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ msg: 'something went wrong' })
+  }
+})
+empRoutes.delete('/:id', async (req, res) => {
+  try {
+    let { id } = req.params
+    await EmpModel.findByIdAndRemove(id)
+    res.status(200).send({ msg: 'deleted successfully' })
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ msg: 'something went wrong' })
+  }
+})
 
 module.exports = { empRoutes }
