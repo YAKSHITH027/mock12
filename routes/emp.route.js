@@ -14,10 +14,13 @@ empRoutes.get('/', async (req, res) => {
       order = -1
     }
     let obj = {}
-    if (department) obj.department
+
+    if (department) obj.department = department
+
     let data = await EmpModel.find(obj)
       .skip(limit * (page - 1))
       .limit(limit)
+      .sort({ salary: order })
 
     res.status(200).send({ data })
   } catch (error) {
