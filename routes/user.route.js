@@ -7,6 +7,7 @@ const userRoute = express.Router()
 userRoute.post('/login', async (req, res) => {
   try {
     let data = req.body
+    console.log(data)
     let userInDB = await UserModel.find({ email: data.email })
     if (userInDB.length == 0) {
       return res.status(400).send({ msg: 'user not found' })
